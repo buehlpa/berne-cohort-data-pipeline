@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patients</title>
+</head>
+<body>
+    <h1>Select a Patient</h1>
+    <ul>
+        {% for patient in patients %}
+            {% if patient in highlighted_patients %}
+                <li style="color: red;"><a href="/patient/{{ patient }}">{{ patient }}</a></li>
+            {% else %}
+                <li><a href="/patient/{{ patient }}">{{ patient }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</body>
+</html>

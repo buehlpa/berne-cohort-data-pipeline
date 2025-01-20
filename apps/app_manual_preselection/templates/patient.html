@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Studies</title>
+</head>
+<body>
+    <h1>Studies for Patient {{ patient_id }}</h1>
+    <ul>
+        {% for study in studies %}
+            {% if study in highlighted_studies %}
+                <li style="color: red;"><a href="/study/{{ patient_id }}/{{ study }}">{{ study }}</a></li>
+            {% else %}
+                <li><a href="/study/{{ patient_id }}/{{ study }}">{{ study }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</body>
+</html>

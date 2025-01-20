@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sequences</title>
+</head>
+<body>
+    <h1>Sequences for Study {{ study_id }}</h1>
+    <ul>
+        {% for sequence in sequences %}
+            {% if sequence in highlighted_sequences %}
+                <li style="color: red;"><a href="/sequence/{{ patient_id }}/{{ study_id }}/{{ sequence }}">{{ sequence }}</a></li>
+            {% else %}
+                <li><a href="/sequence/{{ patient_id }}/{{ study_id }}/{{ sequence }}">{{ sequence }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</body>
+</html>
