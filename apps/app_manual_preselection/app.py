@@ -37,7 +37,7 @@ def login():
 def index():
     if "username" not in session:
         return redirect(url_for("login"))
-    excluded_patients = []  # Add excluded patient IDs here
+    excluded_patients = []  # Add excluded patient IDs here <------------------------------
     all_patients = [
         patient for patient in os.listdir(data_dir)
         if patient.startswith("0") and patient != "test" and patient not in excluded_patients
@@ -108,8 +108,11 @@ def add_sequence():
     output_file = session["output_file"]
     data = request.json
     patient_id = data["patient_id"]
+    study_id = data["study_id"]
+    
     category = data["category"]
     sequence = data["sequence"]
+    
     if os.path.exists(output_file):
         with open(output_file, "r") as f:
             selections = json.load(f)
@@ -118,7 +121,7 @@ def add_sequence():
     if patient_id not in selections:
         selections[patient_id] = {"dwi": [], "t1": [], "other": []}
     if sequence not in selections[patient_id][category]:
-        selections[patient_id][category].append(os.path.join(category,sequence))
+        selections[patient_id][category].append(os.path.join(study_id,sequence))
 
     with open(output_file, "w") as f:
         json.dump(selections, f, indent=4)
