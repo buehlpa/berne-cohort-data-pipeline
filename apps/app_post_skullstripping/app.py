@@ -7,6 +7,9 @@ import base64
 import matplotlib.pyplot as plt
 from io import BytesIO
 
+# run on server : flask run --host=0.0.0.0 --port=5001
+
+
 # Flask application setup
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
