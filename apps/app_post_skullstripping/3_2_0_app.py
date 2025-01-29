@@ -14,7 +14,12 @@ from io import BytesIO
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
 
-data_dir = "/home/bule/berner_daten_analyse/data/nifti_second_try/test"
+
+# change path here for the fional nifti files
+data_dir = "/home/bule/berner_daten_analyse/data/nifti_pascal_selection_try/test"
+
+
+
 selection_file = "user_selection.json"
 
 @app.route("/", methods=["GET", "POST"])
