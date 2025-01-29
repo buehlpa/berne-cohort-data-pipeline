@@ -1,6 +1,7 @@
 import csv
 import pydicom
-
+import re
+import pandas as pd
 
 def collect_all_file_paths(root_directory):
     dcm_files = []
@@ -48,3 +49,11 @@ def get_dicom_value(dicom_path):
         return mod
     except Exception:
         return None
+    
+    
+def select_modalities(patient_data):
+    dwi = patient_data[patient_data['Modality'] == 'dwi'].sort_values(by='Date').head(1)
+    t1 = patient_data[patient_data['Modality'] == 't1'].sort_values(by='Date').head(1)
+    if not dwi.empty and not t1.empty:
+        return pd.concat([dwi, t1])
+    return pd.DataFrame()  

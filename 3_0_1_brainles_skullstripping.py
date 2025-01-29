@@ -4,14 +4,25 @@ import nibabel as nib
 import numpy as np
 import matplotlib.pyplot as plt
 
-pd.set_option('display.max_columns', None)
+from pathlib import Path
+from brainles_preprocessing.modality import Modality, CenterModality
+from brainles_preprocessing.normalization.percentile_normalizer import (
+    PercentileNormalizer,
+)
+from brainles_preprocessing.preprocessor import Preprocessor
+
+
+####### docker cont not needed
+
+###################### ADJSUT THE FILES HERE
 ANALYSIS_PATH='/home/bule/berner_daten_analyse/data'
-NII_TARGET_PATH = '/home/bule/berner_daten_analyse/data/nifti_second_try'
-
-df=pd.read_csv(os.path.join(ANALYSIS_PATH, 'only2_df.csv'))# each patietn has 2 nfitis
-
+NII_TARGET_PATH ='/home/bule/berner_daten_analyse/data/nifti_pascal_selection_try' #'/home/bule/berner_daten_analyse/data/nifti_second_try'
+df=pd.read_csv(os.path.join(ANALYSIS_PATH, 'only2_pascal_selection_df.csv'))# each patietn has 2 nfitis
 
 
+
+
+# pd.set_option('display.max_columns', None)
 
 filter_index_pos = 3
 
@@ -20,6 +31,10 @@ filter_dimension_size = 2
 
 new_paths = []
 count=0
+
+
+#### extract b1000 sequence
+
 
 for path in df['Full_Path_Nifti']:
     dwi = nib.load(path)
@@ -44,7 +59,9 @@ for path in df['Full_Path_Nifti']:
     nib.save(new_nifti, new_file_path)
     
     new_paths.append(new_file_path)
-    
+
+
+########## create new dataframe with the new paths
 dfnew = df.copy()
 dwi=dfnew[dfnew['Modality']=='dwi']
 dwi['sel_b1000'] = new_paths
@@ -62,21 +79,16 @@ for index, row in dfnew.iterrows():
 dict_paths
 
 
-from pathlib import Path
-from brainles_preprocessing.modality import Modality, CenterModality
-from brainles_preprocessing.normalization.percentile_normalizer import (
-    PercentileNormalizer,
-)
-from brainles_preprocessing.preprocessor import Preprocessor
 
+################# SKULLSTRIPPING 
 
 count= 0
 for patid, mods in dict_paths.items():
     
-    if int(patid) <=11250836:
-        continue
+    # if int(patid) <=11250836: ######### <---------------------------------------------------------abortion crit
+    #     continue
     
-    output_folder = Path("/home/bule/berner_daten_analyse/data/nifti_second_try/test/")
+    output_folder = Path(os.path.join(NII_TARGET_PATH),'test')
 
     # specify a normalizer
     percentile_normalizer = PercentileNormalizer(
@@ -126,6 +138,7 @@ for patid, mods in dict_paths.items():
     )
 
     preprocessor.run()
+    
     # count+=1
     # if count == 3:
     #     break
