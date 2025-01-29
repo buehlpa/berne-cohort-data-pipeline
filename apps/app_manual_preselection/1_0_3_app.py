@@ -6,6 +6,8 @@ import numpy as np
 from flask import Flask, render_template, request, jsonify, redirect, url_for, session
 import cv2
 
+
+#export FLASK_APP=1_0_3_app.py
 # run on server : flask run --host=0.0.0.0 --port=5000
 
 app = Flask(__name__)
