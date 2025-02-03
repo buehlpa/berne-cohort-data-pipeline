@@ -9,6 +9,7 @@
 *.nii.gz
 *.sav
 *.dat
+*.svg
 
 *.csv
 *.npy

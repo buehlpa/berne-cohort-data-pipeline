@@ -16,8 +16,8 @@ from brainles_preprocessing.preprocessor import Preprocessor
 
 ###################### ADJSUT THE FILES HERE
 ANALYSIS_PATH='/home/bule/berner_daten_analyse/data'
-NII_TARGET_PATH ='/home/bule/berner_daten_analyse/data/nifti_pascal_selection_try' #'/home/bule/berner_daten_analyse/data/nifti_second_try'
-df=pd.read_csv(os.path.join(ANALYSIS_PATH, 'only2_pascal_selection_df.csv'))# each patietn has 2 nfitis
+NII_TARGET_PATH ='/home/bule/berner_daten_analyse/data/nifti_third_try' #'/home/bule/berner_daten_analyse/data/nifti_second_try'
+df=pd.read_csv(os.path.join(ANALYSIS_PATH, 'only2_third_try_df.csv'))# each patietn has 2 nfitis
 
 
 
@@ -32,11 +32,13 @@ filter_dimension_size = 2
 new_paths = []
 count=0
 
-
 #### extract b1000 sequence
+dfnew = df.copy()
+dfnew['sel_b1000']=dfnew['Full_Path_Nifti']
 
 
-for path in df['Full_Path_Nifti']:
+
+for idx,path in df['Full_Path_Nifti'].items():
     dwi = nib.load(path)
     dwi_shape = dwi.get_fdata().shape
 
@@ -58,17 +60,9 @@ for path in df['Full_Path_Nifti']:
     new_file_path = os.path.join(nifti_folder_path, "b1000-extracted-" + dwi_file_name)
     nib.save(new_nifti, new_file_path)
     
-    new_paths.append(new_file_path)
-
-
+    dfnew.loc[idx,'sel_b1000'] = new_file_path
+    
 ########## create new dataframe with the new paths
-dfnew = df.copy()
-dwi=dfnew[dfnew['Modality']=='dwi']
-dwi['sel_b1000'] = new_paths
-t1=dfnew[dfnew['Modality']=='t1']
-t1['sel_b1000']=t1['Full_Path_Nifti']
-dfnew=pd.concat([dwi,t1])
-dfnew.head()
 
 dict_paths = {}
 for index, row in dfnew.iterrows():
@@ -101,7 +95,7 @@ for patid, mods in dict_paths.items():
     # define center and moving modalities
     center = CenterModality(
         modality_name="t1",
-        input_path=Path(mods['t1']),
+        input_path=Path(mods['anatomic']),
         normalizer=percentile_normalizer,
         # specify the output paths for the raw and normalized images of each step - here only for atlas registered and brain extraction
         raw_skull_output_path=output_folder/f"{patid}/raw_skull_dir/t1_skull_raw.nii.gz",

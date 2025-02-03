@@ -53,7 +53,15 @@ def get_dicom_value(dicom_path):
     
 def select_modalities(patient_data):
     dwi = patient_data[patient_data['Modality'] == 'dwi'].sort_values(by='Date').head(1)
-    t1 = patient_data[patient_data['Modality'] == 't1'].sort_values(by='Date').head(1)
+    t1 = patient_data[patient_data['Modality'] == 'anatomic'].sort_values(by='Date').head(1)
     if not dwi.empty and not t1.empty:
         return pd.concat([dwi, t1])
     return pd.DataFrame()  
+
+
+def remove_duplicates(data):
+    """Remove duplicate values in lists within the dictionary."""
+    cleaned_data = {}
+    for key, value in data.items():
+        cleaned_data[key] = {sub_key: list(set(sub_value)) for sub_key, sub_value in value.items()}
+    return cleaned_data
