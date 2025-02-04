@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient {{ patient_id }}</title>
+</head>
+<body>
+    <h1>Patient: {{ patient_id }}</h1>
+    <div>
+        <h3>Select an Image:</h3>
+        {% for name, path in image_paths.items() %}
+            <button onclick="loadImage('{{ path }}')">{{ name }}</button>
+        {% endfor %}
+    </div>
+    <div>
+        <img id="slice-viewer" src="" alt="NIfTI Slice">
+        <input type="range" id="slice-slider" min="0" max="{{ dimensions[2] - 1 }}" value="0" step="1" onchange="updateSlice(this)">
+    </div>
+    <button onclick="submitResult('ok')">OK</button>
+    <button onclick="submitResult('not_ok')">Not OK</button>
+    <a href="/index"><button>Back to Patients</button></a>
+    <script>
+        let currentImagePath = "{{ image_paths[default_image] }}";
+
+        function updateSlice(slider) {
+            const sliceIndex = slider.value;
+            fetch("/get_slice", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ image_path: currentImagePath, slice_index: sliceIndex })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.slice) {
+                    document.getElementById("slice-viewer").src = `data:image/png;base64,${data.slice}`;
+                } else {
+                    alert("Failed to load slice.");
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        }
+
+        function loadImage(imagePath) {
+            currentImagePath = imagePath;
+            const slider = document.getElementById("slice-slider");
+            slider.value = 0;
+            updateSlice(slider);
+        }
+
+        function submitResult(result) {
+            fetch("/add_result", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ patient_id: "{{ patient_id }}", result: result })
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message || data.error))
+            .catch(error => console.error("Error:", error));
+        }
+
+        // Load the first slice of the default image on page load
+        document.addEventListener("DOMContentLoaded", () => {
+            const slider = document.getElementById("slice-slider");
+            updateSlice(slider);
+        });
+    </script>
+</body>
+</html>

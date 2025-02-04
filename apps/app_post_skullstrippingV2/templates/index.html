@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patients</title>
+</head>
+<body>
+    <h1>Select a Patient</h1>
+    <ul>
+        {% for patient in patients %}
+            <li><a href="/patient/{{ patient }}">{{ patient }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

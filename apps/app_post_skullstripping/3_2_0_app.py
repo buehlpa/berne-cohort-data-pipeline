@@ -18,8 +18,7 @@ app.secret_key = "your_secret_key"
 
 
 # change path here for the fional nifti files
-data_dir = "/home/bule/berner_daten_analyse/data/nifti_pascal_selection_try/test"
-
+data_dir = "/home/bule/berner_daten_analyse/data/nifti_third_try/processed"
 
 
 selection_file = "user_selection.json"
