@@ -84,12 +84,22 @@ def list_nifti_files(directory):
         return
     nifti_files = []
     for root, _, files in os.walk(directory):
-        if 'test' in root:
+        if 'processed' in root:
             continue
-        
         for file in files:
             if file.startswith('b1000-extracted-'):
                 continue
+            if file.endswith(('.nii', '.nii.gz')):
+                nifti_files.append(os.path.join(root, file))
+    return nifti_files
+
+def list_nifti_files_no_ex(directory):
+    if not os.path.exists(directory):
+        print(f"Directory {directory} does not exist.")
+        return
+    nifti_files = []
+    for root, _, files in os.walk(directory):
+        for file in files:
             if file.endswith(('.nii', '.nii.gz')):
                 nifti_files.append(os.path.join(root, file))
     return nifti_files
