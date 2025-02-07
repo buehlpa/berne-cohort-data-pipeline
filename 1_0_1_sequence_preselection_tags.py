@@ -9,8 +9,6 @@ output_path = os.path.join(ANALYSIS_PATH, "other_tags.json")
 
 
 
-
-
 df = pd.read_csv(os.path.join(ANALYSIS_PATH,"dicom_files_df.csv"),sep=',')
 unique_pairs = (df.sort_values(by="File_Name").drop_duplicates(subset=["Patient_ID", "Study_ID", "Sequence_ID"]).reset_index(drop=True))
 
