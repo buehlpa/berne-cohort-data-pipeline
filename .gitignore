@@ -10,7 +10,7 @@
 *.sav
 *.dat
 *.svg
-
+*.gif
 *.csv
 *.npy
 
