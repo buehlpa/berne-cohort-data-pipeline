@@ -27,7 +27,13 @@ BERN_PATH='/nasdata/Berner_Daten/Other_Side_Bilddaten'
 # Project data path
 DATA_PATH='/home/bule/berner_daten_analyse/data'
 
+GIF_PATH='/home/bule/berner_daten_analyse/data/nifti/processed/valid_patient_gifs'
+
 PROCESSED_PATH=os.path.join(DATA_PATH, 'nifti_third_try','processed')
+
+
+
+
 
 
 columns = ["Patient_ID", "dwi_defaced_raw", "anatomic_defaced_raw", "dwi_skull_normalized", "anatomic_skull_normalized",
@@ -72,7 +78,7 @@ all_processed_nifti_filtered.head()
 
 
 
-GIF_PATH='/home/bule/berner_daten_analyse/data/nifti_third_try/processed/valid_patient_gifs'
+
 for row in all_processed_nifti_filtered.iterrows():
     nifti_file=row[1]['dwi_bet_normalized']
     gif_path=os.path.join(GIF_PATH, f"{row[1]['Patient_ID']}_3d_rotation.gif")
