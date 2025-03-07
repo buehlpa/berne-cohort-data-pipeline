@@ -4,6 +4,9 @@ import nibabel as nib
 import numpy as np
 import logging
 from pathlib import Path
+
+#pip install brainles_preprocessing[ereg]
+
 from brainles_preprocessing.modality import Modality, CenterModality
 from brainles_preprocessing.normalization.percentile_normalizer import PercentileNormalizer
 from brainles_preprocessing.preprocessor import Preprocessor
