@@ -8,18 +8,16 @@ from brainles_preprocessing.modality import Modality, CenterModality
 from brainles_preprocessing.normalization.percentile_normalizer import PercentileNormalizer
 from brainles_preprocessing.preprocessor import Preprocessor
 
-
-
-
+# Select the b1000 sequences and start skullstripping with brainles
 
 # Paths
-ANALYSIS_PATH = '/home/bule/berner_daten_analyse/data'
-NII_TARGET_PATH = '/home/bule/berner_daten_analyse/data/nifti_third_try'
-df = pd.read_csv(os.path.join(ANALYSIS_PATH, 'only2_third_try_df.csv'))
+DATA_PATH = '/home/bule/berner_daten_analyse/data'
+NII_TARGET_PATH = '/home/bule/berner_daten_analyse/data/nifti'
+df = pd.read_csv(os.path.join(DATA_PATH, 'only_2_df.csv'))
 
 # Configure logging
 logging.basicConfig(
-    filename=os.path.join(ANALYSIS_PATH, 'processing.log'), 
+    filename=os.path.join(DATA_PATH, 'processing.log'), 
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
