@@ -1,5 +1,10 @@
 # MRI data from bern 
 
+Install packages via:
+
+create conda environment and : pip install -r requirements_pip_freeze.txt all packages into it
+
+
 This repo is for the selection and creation of a skullstripped / defaced dataset for dwi MRI data.
     it includes:
 
