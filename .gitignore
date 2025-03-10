@@ -13,6 +13,8 @@
 *.gif
 *.csv
 *.npy
+*.npz
+
 
 /GPU_testing/
 

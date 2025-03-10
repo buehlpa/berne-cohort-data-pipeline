@@ -26,7 +26,7 @@ import cv2
 
 
 # To run this app open terminal and type the following commands:
-# export FLASK_APP=1_0_3_app.py
+# export FLASK_APP=0_0_app.py
 # run on server : flask run --host=0.0.0.0 --port=5000
 
 

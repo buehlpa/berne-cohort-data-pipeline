@@ -20,15 +20,12 @@ This repo is for the selection and creation of a skullstripped / defaced dataset
     it includes:
 
 
-1.
-    - manual selection of sequences by doctors supported by browser app
-2.
-    - conversion of selected dicom files to nifit format
 
-3.
-    - skullstripping and defacing of the selected files with https://github.com/BrainLesion/preprocessing
-    - manual positiv selection of qualitatively good strippings
+1. - manual selection of sequences by doctors supported by browser app in 0_0_app.py
+2. - conversion of selected dicom files to nifit format
 
-4.
-    - creation of a HDF dataset with skullstripped dwi / defaced dwi aswell as clinical data 
+3. - skullstripping and defacing of the selected files with https://github.com/BrainLesion/preprocessing
+   - manual positiv selection of qualitatively good strippings
+
+4. - creation of a HDF dataset with skullstripped dwi / defaced dwi aswell as clinical data 
 
