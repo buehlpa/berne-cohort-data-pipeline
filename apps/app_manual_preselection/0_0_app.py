@@ -36,8 +36,10 @@ PROJECT_DIR = "/home/bule/berner_daten_analyse"          # <------ Path to the p
 
 
 ## if file does not exist comment the following lines:
-df_path = os.path.join(PROJECT_DIR,'data','dwi_t1_df_2.csv')
-df = pd.read_csv(df_path)
+# df_path = os.path.join(PROJECT_DIR,'data','dwi_t1_df_merged.csv')# "/home/bule/xAI_bern/lesion_segmentation/dwi_t1_df_merged_selection_for_adc.csv"
+# df = pd.read_csv(df_path)
+
+df = pd.read_csv("/home/bule/xAI_bern/lesion_segmentation/dwi_t1_df_merged_selection_for_adc.csv")
 ##
 
 # app
