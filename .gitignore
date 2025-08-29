@@ -14,7 +14,7 @@
 *.csv
 *.npy
 *.npz
-
+*.png
 
 /GPU_testing/
 
