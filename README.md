@@ -30,6 +30,7 @@ This repo is for the selection and creation of a skullstripped / defaced dataset
 
 4. - creation of a HDF dataset with skullstripped dwi / defaced dwi aswell as clinical data 
    - based on the eralier selection of dwi and t1 files, the remaining patients n= 297 are also up for a selection of adc files -> nifti conversion
+   - get lesion segmentation on them 4.2 https://github.com/ezequieldlrosa/DeepIsles with the docker image version -> needs to be installed first
    - descriptions of the tabular data
    
 5. Compare the final tensors 
