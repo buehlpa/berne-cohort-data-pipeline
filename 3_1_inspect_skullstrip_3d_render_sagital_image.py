@@ -34,8 +34,6 @@ PROCESSED_PATH=os.path.join(DATA_PATH, 'nifti_third_try','processed')
 
 
 
-
-
 columns = ["Patient_ID", "dwi_defaced_raw", "anatomic_defaced_raw", "dwi_skull_normalized", "anatomic_skull_normalized",
            "anatomic_defacing_mask", "anatomic_bet_mask", "dwi_defaced_normalized", "anatomic_defaced_normalized",
            "dwi_skull_raw", "anatomic_skull_raw", "dwi_bet_raw", "anatomic_bet_raw",

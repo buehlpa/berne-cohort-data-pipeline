@@ -3,6 +3,8 @@
 ## Overview
 This repository provides a complete pipeline for the **selection, preprocessing, and dataset creation** of skull-stripped and defaced **DWI MRI data** from the Bern dataset.  
 It includes steps for data selection, DICOM-to-NIfTI conversion, quality control, skull stripping, defacing, and integration of clinical tabular data.
+Additionally it provides the Lesions a Lesion Segmentation Script using DeepIsles (https://github.com/ezequieldlrosa/DeepIsles).
+
 
 ---
 
