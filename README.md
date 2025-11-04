@@ -1,36 +1,69 @@
-# MRI data from bern 
+# MRI Data Processing Pipeline — Bern Dataset
 
-## Data
-For this "Pipeline" to work you need the Data Export:
+## Overview
+This repository provides a complete pipeline for the **selection, preprocessing, and dataset creation** of skull-stripped and defaced **DWI MRI data** from the Bern dataset.  
+It includes steps for data selection, DICOM-to-NIfTI conversion, quality control, skull stripping, defacing, and integration of clinical tabular data.
 
-`/nasdata/Berner_Daten/Other_Side_Bilddaten` From Bern
+---
 
-aswell as the tabular data:
+## Data Requirements
+To run the pipeline, you need access to the following data sources:
 
-`/data/clinical/Kopie Olea von Relevent Data Other File 20181005.xlsx`
+- MRI image data:  
+  `/nasdata/Berner_Daten/Other_Side_Bilddaten`
 
-## Environment
-Install packages via:
+- Clinical tabular data:  
+  `/data/clinical/Kopie Olea von Relevent Data Other File 20181005.xlsx`
 
-create conda environment and : `pip install -r requirements_pip_freeze.txt` all packages into it
+---
 
+## Environment Setup
+1. Create a new Conda environment.  
+2. Install all dependencies:
+   ```bash
+   pip install -r requirements_pip_freeze.txt
 
-## Content
-This repo is for the selection and creation of a skullstripped / defaced dataset for dwi MRI data.
-    it includes:
+## Pipeline Components
+1. Sequence Selection
 
+Manual selection of MRI sequences by medical experts, supported by a browser-based interface:
 
+Run 0_0_app.py for visual inspection and selection.
 
-1. - manual selection of sequences by doctors supported by browser app in 0_0_app.py
-2. - conversion of selected dicom files to nifit format
-   -prepartion for adc selection -> used for lesion segmentatoion -> used as concepts for RCAV
+2. DICOM to NIfTI Conversion
 
-3. - skullstripping and defacing of the selected files with https://github.com/BrainLesion/preprocessing
-   - manual positiv selection of qualitatively good strippings
+Converts selected DICOM files into NIfTI format.
 
-4. - creation of a HDF dataset with skullstripped dwi / defaced dwi aswell as clinical data 
-   - based on the eralier selection of dwi and t1 files, the remaining patients n= 297 are also up for a selection of adc files -> nifti conversion
-   - get lesion segmentation on them 4.2 https://github.com/ezequieldlrosa/DeepIsles with the docker image version -> needs to be installed first
-   - descriptions of the tabular data
-   
-5. Compare the final tensors 
+Prepares data for ADC map selection, which is later used for lesion segmentation and concept extraction (RCAV).
+
+3. Skull Stripping and Defacing
+
+Uses preprocessing tools from BrainLesion/preprocessing
+.
+
+Includes manual quality control and positive selection of high-quality skull-stripped images.
+
+4. HDF5 Dataset Creation
+
+Combines skull-stripped and defaced DWI images with clinical data into an HDF5 dataset.
+
+Builds upon previously selected DWI and T1 files.
+
+Remaining patients (n = 297) undergo ADC selection and NIfTI conversion.
+
+Lesion segmentation is performed using DeepIsles
+ (Docker image required).
+
+5. Data Comparison and Analysis
+
+Final step includes tensor comparison and evaluation of processed datasets.
+
+## Notes
+
+The DeepIsles Docker image must be installed prior to running the segmentation step.
+
+Ensure that all required paths and environment variables are accessible within the computing environment.
+
+## Summary
+
+This repository provides a structured and reproducible workflow for creating a high-quality MRI dataset (DWI, skull-stripped, and defaced) integrated with clinical data from Bern. It is designed to facilitate subsequent lesion segmentation, model training, and analysis.
