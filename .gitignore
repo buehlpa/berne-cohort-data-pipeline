@@ -19,7 +19,10 @@
 /GPU_testing/
 
 /data/nifti/
+
 /data/
+
+/archive/
 
 # !data/*.csv
 # !data/*.txt
