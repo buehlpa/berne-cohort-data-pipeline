@@ -19,10 +19,11 @@
 /GPU_testing/
 
 /data/nifti/
+/data/
 
-!data/*.csv
-!data/*.txt
-!data/*.xlsx
+# !data/*.csv
+# !data/*.txt
+# !data/*.xlsx
 
 #### DEFAULT
 # Byte-compiled / optimized / DLL files
