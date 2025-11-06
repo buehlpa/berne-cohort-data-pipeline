@@ -1,4 +1,4 @@
-# MRI Data Processing Pipeline — Bern Dataset
+# MRI Data Processing Pipeline — Bernese Dataset
 
 ## Overview
 This repository provides a complete pipeline for the **selection, preprocessing, and dataset creation** of skull-stripped and defaced **DWI MRI data** from the Bern dataset.  
