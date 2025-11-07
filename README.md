@@ -9,6 +9,10 @@ Additionally it provides the Lesions a Lesion Segmentation Script using DeepIsle
 ---
 
 ## Data Requirements
+
+Due to privacy restrictions all patient related data will **NOT** be published!
+
+
 To run the pipeline, you need access to the following data sources:
 
 - MRI image data:  
